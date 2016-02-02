@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -34,7 +35,16 @@ class UserType extends AbstractType
                 [
                     'label' => 'Escribe un mensaje:',
                 ]
-            );
+            )
+            ->add('file',
+                FileType::class,
+                [
+                    'label' => 'Subir un avatar o cualquier archivo',
+                    'mapped' => false,
+                    'required' => false,
+                ]
+            )
+        ;
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,

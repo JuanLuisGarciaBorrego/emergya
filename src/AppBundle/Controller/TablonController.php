@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -36,10 +37,16 @@ class TablonController extends Controller
     {
         $user = new User();
 
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if($form['file']->getData()) {
+                $this->uploadFile($form['file']->getData(), $user);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -47,6 +54,7 @@ class TablonController extends Controller
             $this->addFlash('success', 'El mensaje se ha publicado correctamente.');
 
             return $this->redirectToRoute('homepage');
+
         }
 
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
@@ -118,5 +126,18 @@ class TablonController extends Controller
             ->setAction($this->generateUrl('message_delete', ['id' => $user->getId()]))
             ->setMethod('DELETE')
             ->getForm();
+    }
+
+    /**
+     * @param File $file
+     * @param User $user
+     */
+    private function uploadFile(File $file, User $user)
+    {
+        $filename = 'emergya-'.$file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
+
+        $file->move($this->getParameter('uploads_directory'), $filename);
+
+        $user->setAvatar($filename);
     }
 }
