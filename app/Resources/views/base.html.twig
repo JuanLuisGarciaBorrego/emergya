@@ -11,6 +11,10 @@
     <body>
         {% block body %}
 
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <i><b>{{ flash_message }}</b></i>
+            {% endfor %}
+
             {% block content %} {% endblock %}
 
         {% endblock %}
