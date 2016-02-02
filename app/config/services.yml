@@ -4,6 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+   app_admin.twig.extension:
+       class: AppBundle\Twig\TablonExtension
+       arguments: ["@assets.packages", "%uploads_directory_name%"]
+       tags:
+           - { name: twig.extension }
