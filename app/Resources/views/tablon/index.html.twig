@@ -13,6 +13,10 @@
         <article class="user">
             <b>#{{ loop.index }} - {{ user.nick }}:</b>
             <p>{{ user.message }}</p>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <b>Estás logueado como administrador.: <a href="{{ path('admin_category_edit', {'id':user.id}) }}"> Puedes editar esta publicación </a></b>
+            {% endif %}
         </article>
     {% else %}
         <p>Aún no hay ninguna nota.</p>

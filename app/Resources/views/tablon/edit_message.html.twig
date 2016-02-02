@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Crear anuncio {% endblock %}
+
+{% block content %}
+
+    <h1>Crear Anuncio</h1>
+
+    <b><a href="{{ path('homepage') }}"> Volver a la página principal </a></b>
+    <hr>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary"> Enviar mensaje </button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
