@@ -45,18 +45,20 @@ class TablonExtension extends \Twig_Extension
      * @param $filename
      * @return string
      */
-    public function visualizar_archivo($filename)
+    public function visualizar_archivo($filename = null)
     {
-        $pathFile = $this->uploads_directory_name.'/'.$filename;
-        $file = new File($pathFile);
+        if ($filename) {
+            $pathFile = $this->uploads_directory_name.'/'.$filename;
+            $file = new File($pathFile);
 
-        $img = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'pjpeg'];
+            $img = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'pjpeg'];
 
-        if (in_array($file->getExtension(), $img)) {
-            return '<img src="'.$this->packages->getUrl($pathFile).'" height="60">';
+            if (in_array($file->getExtension(), $img)) {
+                return '<img src="'.$this->packages->getUrl($pathFile).'" height="60">';
+            }
+
+            return '<a href="'.$this->packages->getUrl($pathFile).'" download>Descargar archivo</a>';
         }
-
-        return '<a href="'.$this->packages->getUrl($pathFile).'" download>Descargar archivo</a>';
     }
 
     public function getName()

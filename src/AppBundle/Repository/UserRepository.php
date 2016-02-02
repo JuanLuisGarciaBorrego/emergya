@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function userOrderByDateTimeDesc()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.publishedAt', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
 }
