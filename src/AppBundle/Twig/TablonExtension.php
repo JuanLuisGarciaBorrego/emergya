@@ -3,14 +3,12 @@
  * Created by PhpStorm.
  * User: juanluis
  * Date: 2/2/16
- * Time: 12:11
+ * Time: 12:11.
  */
-
 namespace AppBundle\Twig;
 
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TablonExtension extends \Twig_Extension
 {
@@ -43,6 +41,7 @@ class TablonExtension extends \Twig_Extension
 
     /**
      * @param $filename
+     *
      * @return string
      */
     public function visualizar_archivo($filename = null)

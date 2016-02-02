@@ -43,12 +43,10 @@ class TablonController extends Controller
     {
         $user = new User();
 
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if ($form['file']->getData()) {
                 $this->uploadFile($form['file']->getData(), $user);
             }
@@ -60,7 +58,6 @@ class TablonController extends Controller
             $this->addFlash('success', 'El mensaje se ha publicado correctamente.');
 
             return $this->redirectToRoute('homepage');
-
         }
 
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
@@ -116,8 +113,7 @@ class TablonController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if($user->getAvatar()) {
+            if ($user->getAvatar()) {
                 $this->removeFile($user->getAvatar());
             }
 

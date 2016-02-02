@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
@@ -60,7 +60,7 @@ class User
     private $file;
 
     /**
-     * Construct
+     * Construct.
      */
     public function __construct()
     {
@@ -70,7 +70,7 @@ class User
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -80,7 +80,7 @@ class User
     }
 
     /**
-     * Set nick
+     * Set nick.
      *
      * @param string $nick
      *
@@ -94,7 +94,7 @@ class User
     }
 
     /**
-     * Get nick
+     * Get nick.
      *
      * @return string
      */
@@ -104,7 +104,7 @@ class User
     }
 
     /**
-     * Set message
+     * Set message.
      *
      * @param string $message
      *
@@ -118,7 +118,7 @@ class User
     }
 
     /**
-     * Get message
+     * Get message.
      *
      * @return string
      */
@@ -128,7 +128,7 @@ class User
     }
 
     /**
-     * Set publishedAt
+     * Set publishedAt.
      *
      * @param \DateTime $publishedAt
      *
@@ -142,7 +142,7 @@ class User
     }
 
     /**
-     * Get publishedAt
+     * Get publishedAt.
      *
      * @return \DateTime
      */
@@ -152,7 +152,7 @@ class User
     }
 
     /**
-     * Set avatar
+     * Set avatar.
      *
      * @param string $avatar
      *
@@ -166,7 +166,7 @@ class User
     }
 
     /**
-     * Get avatar
+     * Get avatar.
      *
      * @return string
      */
@@ -191,4 +191,3 @@ class User
         $this->file = $file;
     }
 }
-
