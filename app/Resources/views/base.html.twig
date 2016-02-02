@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %} {% endblock %} | Emergya</title>
+        {% block stylesheets %}
+
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    </head>
+    <body>
+        {% block body %}
+
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <i><b>{{ flash_message }}</b></i>
+            {% endfor %}
+
+            {% block content %} {% endblock %}
+
+            <hr>
+
+            {{ global.author }}
+        {% endblock %}
+
+        {% block javascripts %}
+
+        {% endblock %}
+    </body>
+</html>

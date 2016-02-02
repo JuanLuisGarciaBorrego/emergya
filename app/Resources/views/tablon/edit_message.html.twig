@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Editar anuncio (admin){% endblock %}
+
+{% block content %}
+
+    <h1>Editar anuncio</h1>
+
+    <b><a href="{{ path('homepage') }}"> Volver a la página principal </a></b>
+    <hr>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit"> Enviar mensaje </button>
+    {{ form_end(form) }}
+
+    {% if form.vars.value.avatar %}
+        <p>
+            Archivo:<br> {{ visualizar_archivo(form.vars.value.avatar) }}
+        </p>
+    {% endif %}
+
+    <h3>¿Quiere eliminarlo?</h3>
+    {{ form_start(form_delete_user) }}
+        {{ form_widget(form_delete_user) }}
+        <button type="submit">Eliminar</button>
+    {{ form_end(form_delete_user) }}
+
+{% endblock %}
