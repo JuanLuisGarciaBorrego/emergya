@@ -11,11 +11,13 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary"> Enviar mensaje </button>
+        <button type="submit"> Enviar mensaje </button>
     {{ form_end(form) }}
 
-{% endblock %}
-
-{% block stylesheets %}
+    <h3>¿Quiere eliminarlo?</h3>
+    {{ form_start(form_delete_user) }}
+        {{ form_widget(form_delete_user) }}
+        <button type="submit">Eliminar</button>
+    {{ form_end(form_delete_user) }}
 
 {% endblock %}

@@ -58,13 +58,15 @@ class TablonController extends Controller
     }
 
     /**
-     * @Route("/editar-user/{id}", name="admin_category_edit")
+     * @Route("/editar-user/{id}", name="message_edit")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user, ['token_user' => $this->getUser()]);
         $form->handleRequest($request);
+
+        $formDelete = $this->formDeleteUser($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -80,8 +82,37 @@ class TablonController extends Controller
             'tablon/edit_message.html.twig',
             [
                 'form' => $form->createView(),
+                'form_delete_user' => $formDelete->createView(),
             ]
         );
+    }
+
+    /**
+     * @Route("/delete/{id}", name="message_delete")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteAction(User $user, Request $request)
+    {
+        $form = $this->formDeleteUser($user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('success', 'Has eliminado un anuncio del tablón');
+        }
+
+        return $this->redirectToRoute('homepage');
+    }
+
+    private function formDeleteUser(User $user)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('message_delete', ['id' => $user->getId()]))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 
 }

@@ -21,7 +21,7 @@
             <p>{{ user.message }}</p>
 
             {% if is_granted('ROLE_ADMIN') %}
-                <b>Estás logueado como administrador.: <a href="{{ path('admin_category_edit', {'id':user.id}) }}"> Puedes editar esta publicación </a></b>
+                <b>Estás logueado como administrador.: <a href="{{ path('message_edit', {'id':user.id}) }}"> Puedes editar esta publicación </a></b>
             {% endif %}
         </article>
     {% else %}
