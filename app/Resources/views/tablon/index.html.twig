@@ -3,7 +3,13 @@
 {% block title %} Homepage {% endblock %}
 
 {% block content %}
-    <p><a href="{{ path('login_route') }}">Login</a></p>
+    <p>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a href="{{ path('logout_route') }}">Logout {{ app.user }}</a>
+        {% else %}
+            <a href="{{ path('login_route') }}">login</a>
+        {% endif %}
+
     <h1>Tablón Emergya</h1>
 
     <b><a href="{{ path('new_message') }}"> CREAR ANUNCIO </a></b>
