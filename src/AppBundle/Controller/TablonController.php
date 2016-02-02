@@ -116,7 +116,10 @@ class TablonController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->removeFile($user->getAvatar());
+
+            if($user->getAvatar()) {
+                $this->removeFile($user->getAvatar());
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
