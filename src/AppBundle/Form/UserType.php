@@ -36,20 +36,13 @@ class UserType extends AbstractType
                     'label' => 'Escribe un mensaje:',
                 ]
             )
-            ->add('file',
-                FileType::class,
-                [
-                    'label' => 'Subir un avatar o cualquier archivo',
-                    'mapped' => false,
-                    'required' => false,
-                ]
-            )
         ;
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
                 $form = $event->getForm();
+                $user = $event->getData();
 
                 if ($this->token_user) {
                     $form
@@ -58,6 +51,20 @@ class UserType extends AbstractType
                             DateType::class
                         );
                 }
+
+                if (!$user->getAvatar()) {
+                    $form
+                        ->add(
+                            'file',
+                            FileType::class,
+                            [
+                                'label' => 'Subir un avatar o cualquier archivo',
+                                'mapped' => false,
+                                'required' => false,
+                            ]
+                        );
+                }
+
             }
         );
     }
