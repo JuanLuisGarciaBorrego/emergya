@@ -4,15 +4,18 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class TablonController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+
+        return $this->render('tablon/index.html.twig', [
+            'users' => $user
+        ]);
     }
 }

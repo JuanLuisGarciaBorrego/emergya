@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block content %}
+
+    <h1>Tablón Emergya</h1>
+
+    <b><a href=""> CREAR ANUNCIO </a></b>
+    <hr>
+
+    {% for user in users %}
+        <article class="user">
+            <b>#{{ loop.index }} - {{ user.nick }}:</b>
+            <p>{{ user.message }}</p>
+        </article>
+    {% else %}
+        <p>Aún no hay ninguna nota.</p>
+    {% endfor %}
+
+    <hr>
+    Aquí va la paginación
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
