@@ -19,6 +19,7 @@ class UserType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $userData = $builder->getData();
         $this->token_user = $options['token_user'];
 
         $builder
@@ -27,6 +28,9 @@ class UserType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Escribe un nick:',
+                    'attr' => [
+                        'readonly' => ($userData->getId() ? true : false),
+                    ],
                 ]
             )
             ->add(
@@ -34,9 +38,11 @@ class UserType extends AbstractType
                 TextareaType::class,
                 [
                     'label' => 'Escribe un mensaje:',
+                    'attr' => [
+                        'readonly' => ($userData->getId() ? true : false),
+                    ],
                 ]
-            )
-        ;
+            );
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
@@ -63,7 +69,6 @@ class UserType extends AbstractType
                             ]
                         );
                 }
-
             }
         );
     }
