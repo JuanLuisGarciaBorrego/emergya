@@ -45,10 +45,19 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="avatar", type="string", length=255)
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
      */
     private $avatar;
 
+    /**
+     * Construct
+     */
+    public function __construct()
+    {
+        $datetime = new \DateTime('now');
+
+        $this->publishedAt = $datetime;
+    }
 
     /**
      * Get id
