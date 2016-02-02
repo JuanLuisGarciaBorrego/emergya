@@ -136,7 +136,7 @@ class TablonController extends Controller
      */
     private function uploadFile(File $file, User $user)
     {
-        $filename = 'emergya-'.$file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
+        $filename = 'emergya-'.$user->getNick().'.'.$file->getClientOriginalExtension();
 
         $file->move($this->getParameter('uploads_directory'), $filename);
 
