@@ -14,6 +14,13 @@
         <button type="submit"> Enviar mensaje </button>
     {{ form_end(form) }}
 
+    {% if form.vars.value.avatar %}
+        <p>
+            Archivo:<br> {{ visualizar_archivo(form.vars.value.avatar) }}
+        </p>
+    {% endif %}
+
+
     <h3>¿Quiere eliminarlo?</h3>
     {{ form_start(form_delete_user) }}
         {{ form_widget(form_delete_user) }}
