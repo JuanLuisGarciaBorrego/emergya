@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity("nick")
  */
 class User
 {
@@ -30,7 +33,7 @@ class User
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="message", type="text")
      */
     private $message;
