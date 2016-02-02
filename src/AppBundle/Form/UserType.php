@@ -59,7 +59,6 @@ class UserType extends AbstractType
                             FileType::class,
                             [
                                 'label' => 'Subir un avatar o cualquier archivo',
-                                'mapped' => false,
                                 'required' => false,
                             ]
                         );

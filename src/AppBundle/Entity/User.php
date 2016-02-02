@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * User
@@ -51,6 +52,12 @@ class User
      * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
      */
     private $avatar;
+
+    /**
+     * @var File
+     * @Assert\File(maxSize = "2M")
+     */
+    private $file;
 
     /**
      * Construct
@@ -166,6 +173,22 @@ class User
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * @return File
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
     }
 }
 
