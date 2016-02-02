@@ -26,7 +26,12 @@ security:
             anonymous: ~
             pattern: ^/
             provider: in_memory
-            http_basic: ~
+            form_login:
+                login_path: login_route
+                check_path: login_check_route
+            logout:
+                path: logout_route
+                target: homepage
 
     access_control:
         - { path: ^/editar-user, roles: ROLE_ADMIN }
