@@ -15,26 +15,32 @@
     <b><a href="{{ path('new_message') }}"> CREAR ANUNCIO </a></b>
     <hr>
 
-    {% for user in users %}
+    {% for user in users.currentPageResults %}
         <article class="user">
             <b>#{{ loop.index }} - {{ user.nick }}:</b>
-            <p>{{ user.message }}</p>
 
-            {{ user.avatar }}
+            <p>{{ user.message }}</p>
 
             {{ visualizar_archivo(user.avatar) }}
 
             <br>
             {% if is_granted('ROLE_ADMIN') %}
-                <b>Estás logueado como administrador.: <a href="{{ path('message_edit', {'id':user.id}) }}"> Puedes editar esta publicación </a></b>
+                <b>Estás logueado como administrador.: <a href="{{ path('message_edit', {'id':user.id}) }}"> Puedes
+                        editar esta publicación </a></b>
             {% endif %}
         </article>
     {% else %}
         <p>Aún no hay ninguna nota.</p>
     {% endfor %}
 
+
     <hr>
-    Aquí va la paginación
+    Aquí va la paginación cuando hay más de 5 anuncios
+    <br>
+    {% if users.haveToPaginate %}
+        {{ pagerfanta(users, 'default', {'homepage': page}) }}
+    {% endif %}
+
 {% endblock %}
 
 {% block stylesheets %}

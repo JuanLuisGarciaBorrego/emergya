@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
@@ -14,17 +16,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class TablonController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/{page}", name="homepage", requirements={"page" = "\d+"}, defaults={"page" = "1"})
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction($page)
     {
-        $user = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+        $adapter = new ArrayAdapter($this->getDoctrine()->getRepository('AppBundle:User')->userOrderByDateTimeDesc());
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(5);
+        $pagerfanta->setCurrentPage($page);
 
         return $this->render(
             'tablon/index.html.twig',
             [
-                'users' => $user,
+                'users' => $pagerfanta,
+                'page' => $page,
             ]
         );
     }
