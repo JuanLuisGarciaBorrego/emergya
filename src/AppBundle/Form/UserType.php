@@ -58,7 +58,7 @@ class UserType extends AbstractType
                         );
                 }
 
-                if (!$user->getAvatar()) {
+                if (!$user->getId()) {
                     $form
                         ->add(
                             'file',
