@@ -43,7 +43,7 @@ class TablonController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if($form['file']->getData()) {
+            if ($form['file']->getData()) {
                 $this->uploadFile($form['file']->getData(), $user);
             }
 
@@ -110,6 +110,8 @@ class TablonController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->removeFile($user->getAvatar());
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush();
@@ -139,5 +141,14 @@ class TablonController extends Controller
         $file->move($this->getParameter('uploads_directory'), $filename);
 
         $user->setAvatar($filename);
+    }
+
+    private function removeFile($filename)
+    {
+        $file = $this->getParameter('uploads_directory').'/'.$filename;
+
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 }
