@@ -8,11 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class TablonController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -28,6 +30,7 @@ class TablonController extends Controller
 
     /**
      * @Route("/crear-mensaje", name="new_message")
+     * @Method({"GET", "POST"})
      */
     public function newMessageAction(Request $request)
     {
@@ -59,6 +62,7 @@ class TablonController extends Controller
 
     /**
      * @Route("/editar-user/{id}", name="message_edit")
+     * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(User $user, Request $request)
@@ -89,6 +93,7 @@ class TablonController extends Controller
 
     /**
      * @Route("/delete/{id}", name="message_delete")
+     * @Method("DELETE")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(User $user, Request $request)
@@ -114,5 +119,4 @@ class TablonController extends Controller
             ->setMethod('DELETE')
             ->getForm();
     }
-
 }
